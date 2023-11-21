@@ -1,4 +1,4 @@
-# 포토그램 - 인스타그램 클론 코딩
+# 포토그램
 
 ### 의존성
 
@@ -32,46 +32,29 @@ create database photogram;
 ### yml 설정
 
 ```yml
-server:
-  port: 8080
-  servlet:
-    context-path: /
-    encoding:
-      charset: utf-8
-      enabled: true
-    
-spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
-      
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/photogram?serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&useSSL=false
-    username: seon	
-    password: seon1234
-    
-  jpa:
-    open-in-view: true
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
-      
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 2MB
+server.port=8080
+server.servlet.context-path=/
+server.servlet.encoding.charset=utf-8
+server.servlet.encoding.enabled=true
 
-  security:
-    user:
-      name: test
-      password: 1234   
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
 
-#file:
-#  path: C:/src/springbootwork-sts/upload/
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.datasource.url=jdbc:mariadb://localhost:3307/photogram?serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&useSSL=false
+spring.datasource.username=seon
+spring.datasource.password=seon1234
+
+spring.jpa.open-in-view=true
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+spring.jpa.show-sql=true
+
+spring.servlet.multipart.enabled=true
+spring.servlet.multipart.max-file-size=2MB
+
+spring.security.user.name=test
+spring.security.user.password=1234
 ```
 
 ### 태그라이브러리
