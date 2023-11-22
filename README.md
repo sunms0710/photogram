@@ -19,6 +19,10 @@ implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 
 <!-- JSTL -->
 implementation 'javax.servlet:jstl'
+
+<!-- validation -->
+implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 ```
 
 ### 데이터베이스
