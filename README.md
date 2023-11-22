@@ -33,7 +33,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'seon'@'%';
 create database photogram;
 ```
 
-### yml 설정
+### application.properties 설정
 
 ```yml
 server.port=8080
