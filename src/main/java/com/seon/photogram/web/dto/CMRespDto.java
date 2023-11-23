@@ -1,10 +1,9 @@
-package com.seon.photogram.web;
+package com.seon.photogram.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
 
 @NoArgsConstructor
 @AllArgsConstructor
