@@ -1,6 +1,7 @@
 package com.seon.photogram.handler;
 
 import com.seon.photogram.handler.ex.CustomApiException;
+import com.seon.photogram.handler.ex.CustomException;
 import com.seon.photogram.handler.ex.CustomValidationApiException;
 import com.seon.photogram.handler.ex.CustomValidationException;
 import com.seon.photogram.util.Script;
@@ -23,7 +24,11 @@ public class ControllerExceptionHandler {
         }else {
             return Script.back(e.getErrorMap().toString());
         }
+    }
 
+    @ExceptionHandler(CustomException.class)
+    public String exception(CustomException e) {
+        return Script.back(e.getMessage());
     }
 
     @ExceptionHandler(CustomValidationApiException.class)
