@@ -2,7 +2,9 @@ package com.seon.photogram.service;
 
 import com.seon.photogram.domain.user.User;
 import com.seon.photogram.domain.user.UserRepository;
+import com.seon.photogram.handler.ex.CustomException;
 import com.seon.photogram.handler.ex.CustomValidationApiException;
+import com.seon.photogram.web.dto.user.UserProfileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,20 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Transactional(readOnly = true)
+    public UserProfileDto userProfile(int pageUserId, int principalId) {
+        UserProfileDto userProfileDto = new UserProfileDto();
+        User userEntity = userRepository.findById(pageUserId).orElseThrow(() -> {
+           throw new CustomException("해당 프로필 페이지는 없는 페이지 입니다.");
+        });
+
+        userProfileDto.setUser(userEntity);
+        userProfileDto.setPageOwnerState(pageUserId == principalId);
+        userProfileDto.setImageCount(userEntity.getImages().size());
+        return userProfileDto;
+    }
+
     @Transactional
     public User userEdit(int id, User user){
         User userEntity = userRepository.findById(id).orElseThrow(() ->
