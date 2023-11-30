@@ -1,5 +1,6 @@
 package com.seon.photogram.service;
 
+import com.seon.photogram.domain.subscribe.SubScribeRepository;
 import com.seon.photogram.domain.user.User;
 import com.seon.photogram.domain.user.UserRepository;
 import com.seon.photogram.handler.ex.CustomException;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final SubScribeRepository subScribeRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional(readOnly = true)
@@ -27,6 +29,12 @@ public class UserService {
         userProfileDto.setUser(userEntity);
         userProfileDto.setPageOwnerState(pageUserId == principalId);
         userProfileDto.setImageCount(userEntity.getImages().size());
+
+        int subscribeState = subScribeRepository.mSubscribeState(principalId, pageUserId);
+        int subscribeCount = subScribeRepository.mSubscribeCount(pageUserId);
+
+        userProfileDto.setSubscribeState(subscribeState == 1);
+        userProfileDto.setSubscribeCount(subscribeCount);
         return userProfileDto;
     }
 
