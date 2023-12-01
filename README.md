@@ -24,7 +24,7 @@ implementation 'javax.servlet:jstl'
 implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 <!-- QLRM -->
-implementation group: 'ch.simas.qlrm', name: 'qlrm', version: '1.7.1'
+implementation group: 'org.qlrm', name: 'qlrm', version: '3.0.4'
 
 ```
 
