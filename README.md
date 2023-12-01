@@ -23,6 +23,9 @@ implementation 'javax.servlet:jstl'
 <!-- validation -->
 implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+<!-- QLRM -->
+implementation group: 'ch.simas.qlrm', name: 'qlrm', version: '1.7.1'
+
 ```
 
 ### 데이터베이스
