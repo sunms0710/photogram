@@ -23,6 +23,9 @@ implementation 'javax.servlet:jstl'
 <!-- validation -->
 implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+<!-- QLRM -->
+implementation group: 'org.qlrm', name: 'qlrm', version: '3.0.4'
+
 ```
 
 ### 데이터베이스
