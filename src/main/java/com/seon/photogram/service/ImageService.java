@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -36,5 +37,11 @@ public class ImageService {
 
         Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
         imageRepository.save(image);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Image> imageStory(int principal){
+        List<Image> images = imageRepository.mStory(principal);
+        return images;
     }
 }
