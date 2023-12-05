@@ -6,13 +6,14 @@ import com.seon.photogram.domain.image.ImageRepository;
 import com.seon.photogram.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -40,8 +41,8 @@ public class ImageService {
     }
 
     @Transactional(readOnly = true)
-    public List<Image> imageStory(int principal){
-        List<Image> images = imageRepository.mStory(principal);
+    public Page<Image> imageStory(int principal, Pageable pageable){
+        Page<Image> images = imageRepository.mStory(principal, pageable);
         return images;
     }
 }
