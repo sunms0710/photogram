@@ -1,6 +1,7 @@
 package com.seon.photogram.domain.image;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.seon.photogram.domain.likes.Likes;
 import com.seon.photogram.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -27,6 +29,16 @@ public class Image {
     @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
+
+    @JsonIgnoreProperties({"image"})
+    @OneToMany(mappedBy = "image")
+    private List<Likes> likes;
+
+    @Transient //DB에 컬럼이 만들어지지 않음
+    private boolean likeState;
+
+    @Transient
+    private int likeCount;
 
     private LocalDateTime createDate;
 
