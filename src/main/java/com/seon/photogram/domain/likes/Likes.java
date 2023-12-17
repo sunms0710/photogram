@@ -1,5 +1,6 @@
 package com.seon.photogram.domain.likes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seon.photogram.domain.image.Image;
 import com.seon.photogram.domain.user.User;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class Likes {
     @ManyToOne
     private Image image;
 
-
+    @JsonIgnoreProperties({"images"})
     @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
