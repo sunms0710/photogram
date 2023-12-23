@@ -25,6 +25,7 @@ public class ImageService {
     private String filePath;
     private final ImageRepository imageRepository;
 
+    // 이미지 업로드
     @Transactional
     public void imageUpload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
         UUID uuid = UUID.randomUUID();
