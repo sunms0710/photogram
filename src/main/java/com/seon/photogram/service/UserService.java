@@ -7,9 +7,16 @@ import com.seon.photogram.handler.ex.CustomException;
 import com.seon.photogram.handler.ex.CustomValidationApiException;
 import com.seon.photogram.web.dto.user.UserProfileDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +25,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final SubScribeRepository subScribeRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Transactional(readOnly = true)
     public UserProfileDto userProfile(int pageUserId, int principalId) {
@@ -35,6 +43,11 @@ public class UserService {
 
         userProfileDto.setSubscribeState(subscribeState == 1);
         userProfileDto.setSubscribeCount(subscribeCount);
+
+        //좋아요 카운트 추가
+        userEntity.getImages().forEach((image)->{
+            image.setLikeCount(image.getLikes().size());
+        });
         return userProfileDto;
     }
 
@@ -52,6 +65,31 @@ public class UserService {
         userEntity.setWebsite(user.getWebsite());
         userEntity.setPhone(user.getPhone());
         userEntity.setGender(user.getGender());
+
+        return userEntity;
+    }
+
+    // 유저 프로필 사진 변경
+    @Value("${file.path}")
+    private String filePath;
+
+    @Transactional
+    public User profileImageUpdate(int principalId, MultipartFile profileImageFile) {
+        UUID uuid = UUID.randomUUID();
+        String imageFileName = uuid + "_" + profileImageFile.getOriginalFilename();
+        Path imageFilePath = Paths.get(filePath + imageFileName);
+
+        try {
+            Files.write(imageFilePath, profileImageFile.getBytes());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        User userEntity = userRepository.findById(principalId).orElseThrow(()->{
+           throw new CustomValidationApiException("유저를 찾을 수 없습니다.");
+        });
+
+        userEntity.setProfileImageUrl(imageFileName);
 
         return userEntity;
     }
