@@ -1,5 +1,6 @@
 package com.seon.photogram.domain.comment;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seon.photogram.domain.image.Image;
 import com.seon.photogram.domain.user.User;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class Comment {
 
     @JoinColumn(name = "userID")
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"images"})
     private User user;
 
     @JoinColumn(name = "imageId")
