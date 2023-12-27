@@ -1,6 +1,7 @@
 package com.seon.photogram.domain.image;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.seon.photogram.domain.comment.Comment;
 import com.seon.photogram.domain.likes.Likes;
 import com.seon.photogram.domain.user.User;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,11 @@ public class Image {
     @JsonIgnoreProperties({"image"})
     @OneToMany(mappedBy = "image")
     private List<Likes> likes;
+
+    @OrderBy("id DESC")
+    @JsonIgnoreProperties({"image"})
+    @OneToMany(mappedBy = "image")
+    private List<Comment> comments;
 
     @Transient //DB에 컬럼이 만들어지지 않음
     private boolean likeState;
