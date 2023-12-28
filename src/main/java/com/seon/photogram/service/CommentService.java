@@ -39,7 +39,7 @@ public class CommentService {
 
     // 댓글 삭제
     @Transactional
-    public void commentDelete() {
-
+    public void commentDelete(int id) {
+        commentRepository.deleteById(id);
     }
 }
