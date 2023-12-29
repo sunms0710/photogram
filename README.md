@@ -26,6 +26,9 @@ implementation 'org.springframework.boot:spring-boot-starter-validation'
 <!-- QLRM -->
 implementation group: 'org.qlrm', name: 'qlrm', version: '3.0.4'
 
+<!-- aop -->
+implementation 'org.springframework.boot:spring-boot-starter-aop'
+
 ```
 
 ### 데이터베이스
