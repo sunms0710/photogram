@@ -19,6 +19,7 @@ public class SubscribeService {
     private final SubScribeRepository subScribeRepository;
     private final EntityManager em;
 
+    // 구독
     @Transactional
     public void subscribe(int fromUserId, int toUserId){
         try {
@@ -28,7 +29,8 @@ public class SubscribeService {
         }
 
     }
-
+    
+    // 구독 취소
     @Transactional
     public void unSubscribe(int fromUserId, int toUserId){
         subScribeRepository.mUnSubscribe(fromUserId, toUserId);

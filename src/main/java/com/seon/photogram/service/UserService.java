@@ -26,7 +26,7 @@ public class UserService {
     private final SubScribeRepository subScribeRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
+    // 회원 프로필
     @Transactional(readOnly = true)
     public UserProfileDto userProfile(int pageUserId, int principalId) {
         UserProfileDto userProfileDto = new UserProfileDto();
@@ -51,6 +51,7 @@ public class UserService {
         return userProfileDto;
     }
 
+    // 회원 정보 수정
     @Transactional
     public User userEdit(int id, User user){
         User userEntity = userRepository.findById(id).orElseThrow(() ->
@@ -69,7 +70,7 @@ public class UserService {
         return userEntity;
     }
 
-    // 유저 프로필 사진 변경
+    // 회원 프로필 사진 변경
     @Value("${file.path}")
     private String filePath;
 

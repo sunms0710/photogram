@@ -41,7 +41,8 @@ public class ImageService {
         Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
         imageRepository.save(image);
     }
-
+    
+    // 스토리 불러오기
     @Transactional(readOnly = true)
     public Page<Image> imageStory(int principalId, Pageable pageable){
         Page<Image> images = imageRepository.mStory(principalId, pageable);
@@ -59,7 +60,8 @@ public class ImageService {
         });
         return images;
     }
-
+    
+    // 인기 스토리
     @Transactional(readOnly = true)
     public List<Image> popularImage() {
         return imageRepository.mPopular();
